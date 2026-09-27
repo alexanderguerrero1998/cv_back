@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 
 async function connect_db() {
   try {
-    await mongoose.connect("mongodb://localhost:27017/dbcv");
+    await mongoose.connect(process.env.MONGODB_URI);
+    //await mongoose.connect("mongodb://localhost:27017/dbcv");
   } catch (error) {
     if (!(error instanceof Error)) {
       throw error;
