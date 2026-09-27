@@ -15,6 +15,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "0.0.0.0";
 
+app.set("trust proxy", 1);
+
 const allowedOrigins = [
   "http://localhost:5173",
   "https://frontendcv.netlify.app", // reemplaza con tu URL real de Netlify
