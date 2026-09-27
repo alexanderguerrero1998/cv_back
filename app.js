@@ -15,13 +15,23 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "0.0.0.0";
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://frontendcv.netlify.app", // reemplaza con tu URL real de Netlify
+];
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   }),
 );
-
 app.use(express.json());
 app.use(
   session({
